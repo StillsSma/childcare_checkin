@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to the Daycare App! </h1>
+    </div>
+    <div class="container">
+      <h4>Please Enter Your Child's 4 Digit Pin Number Below</h2>
+    </div>
+    <div class="container">
+      <form class="" action="" method="post">
+        {%csrf_token%}
+        {{ form.as_p }}
+        <input type="submit" name="" value="Submit!">
+
+      </form>
+
+
+    </div>
+  </body>
+</html>
+
+{% endblock %}

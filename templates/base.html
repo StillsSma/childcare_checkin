@@ -1,0 +1,33 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" media="screen" title="no title">
+   <style media="screen">
+     body {
+       background-color: white;
+     }
+   </style>
+  </head>
+  <nav>
+      <div class="container">
+
+      <ul class="nav nav-pills">
+
+          {% if not request.user.is_authenticated %}
+            <li role="presentation"><a href="{% url 'login' %}">Faculty Login</a></li>
+
+          {% endif %}
+        </ul>
+
+              </div>
+
+          </nav>
+  <body>
+      {% block content %}
+      {% endblock %}
+
+  </body>
