@@ -15,12 +15,26 @@
 </nav>
 
 
-{% for child in object_list%}
+<table style="width:100%">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Checked In</th>
+    <th>Checked Out</th>
+  </tr>
+  {% for child in object_list %}
+  <tr>
+    <td>{{child.first_name}}</td>
+    <td>{{child.last_name}}</td>
+    <td>{{child.}}</td>
+    <td>{{child.}}</td> 
+  </tr>
+  {% endfor %}
+</table>
 <div class="container">
-  {{child}}
+
 
 </div>
 
-{% endfor %}
 
 {% endblock %}

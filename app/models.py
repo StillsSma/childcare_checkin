@@ -12,6 +12,7 @@ class Child(models.Model):
         return "{} {}, {}".format(self.first_name, self.last_name, self.middle_initial)
 
 
+
 CHILD_STATUS = [
     ("in", "checked_in"),
     ("out", "checked_out"),

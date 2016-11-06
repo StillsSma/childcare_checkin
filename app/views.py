@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from app.models import Child, Report
 from django.views.generic import TemplateView, ListView, CreateView, DetailView
 from django.views.generic.edit import FormView, UpdateView
 from app.forms import PinForm
+from hashids import Hashids
+
 
 
 
@@ -14,10 +16,13 @@ from app.forms import PinForm
 class PinView(FormView):
     template_name = 'index.html'
     form_class = PinForm
-    success_url = reverse_lazy('report_create_view' )
 
     def form_valid(self, form):
         return super(PinView, self).form_valid(form)
+    def get_success_url(self):
+        hashids = Hashids().encode(int(self.request.POST['pin']))
+        print(hashids)
+        return reverse('report_create_view', args=[hashids])
 
 
 class ReportCreateView(CreateView):
@@ -27,7 +32,9 @@ class ReportCreateView(CreateView):
 
     def form_valid(self, form):
         instance = form.save(commit=False)
-        instance.child = Child.objects.get(id=1)
+        pin = Hashids().decode(self.kwargs['pin'])
+        print(pin[0])
+        instance.child = Child.objects.get(pin=pin[0])
         return super().form_valid(form)
 
 class ChildListView(ListView):
