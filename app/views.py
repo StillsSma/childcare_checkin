@@ -18,7 +18,10 @@ class PinView(FormView):
     form_class = PinForm
 
     def form_valid(self, form):
-        return super(PinView, self).form_valid(form)
+        try:
+            return super(PinView, self).form_valid(form)
+        except ValueError:
+            return super(PinView, self).form_invalid(form)
     def get_success_url(self):
         hashids = Hashids().encode(int(self.request.POST['pin']))
         print(hashids)
@@ -33,7 +36,6 @@ class ReportCreateView(CreateView):
     def form_valid(self, form):
         instance = form.save(commit=False)
         pin = Hashids().decode(self.kwargs['pin'])
-        print(pin[0])
         instance.child = Child.objects.get(pin=pin[0])
         return super().form_valid(form)
 

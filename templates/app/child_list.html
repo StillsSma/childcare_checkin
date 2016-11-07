@@ -14,24 +14,29 @@
 
 </nav>
 
-
+<div class="container">
 <table style="width:100%">
   <tr>
     <th>Firstname</th>
     <th>Lastname</th>
+    <th>PIN</th>
     <th>Checked In</th>
     <th>Checked Out</th>
+    <th>Time Spent</th>
+    <th>Total Cost</th>
+
   </tr>
   {% for child in object_list %}
   <tr>
     <td>{{child.first_name}}</td>
     <td>{{child.last_name}}</td>
-    <td>{{child.}}</td>
-    <td>{{child.}}</td> 
+    <td>{{child.pin}}</td>
+    <td>{{child.checked_in.time_created}}</td>
+    <td>{{child.checked_out.time_created}}</td>
   </tr>
   {% endfor %}
 </table>
-<div class="container">
+
 
 
 </div>

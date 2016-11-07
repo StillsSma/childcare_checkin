@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Checking in or checking out?</h1>
+<div class="container">
+  <h1>Checking in or checking out?</h1>
+
+</div>
+
+<div class="container">
 
 <form class="" action="" method="post">
   {%csrf_token%}
@@ -8,7 +13,8 @@
 
   <input type="submit" name="" value="Submit!">
 
-
 </form>
+
+</div>
 
 {% endblock %}
