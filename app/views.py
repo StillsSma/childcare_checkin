@@ -7,12 +7,6 @@ from app.forms import PinForm
 from hashids import Hashids
 
 
-
-
-#class IndexView(TemplateView):
-#    template_name = "index.html"
-
-
 class PinView(FormView):
     template_name = 'index.html'
     form_class = PinForm
@@ -24,7 +18,6 @@ class PinView(FormView):
             return super(PinView, self).form_invalid(form)
     def get_success_url(self):
         hashids = Hashids().encode(int(self.request.POST['pin']))
-        print(hashids)
         return reverse('report_create_view', args=[hashids])
 
 
@@ -37,12 +30,15 @@ class ReportCreateView(CreateView):
         instance = form.save(commit=False)
         pin = Hashids().decode(self.kwargs['pin'])
         instance.child = Child.objects.get(pin=pin[0])
+        if instance.child.is_not_checked_in() == False and instance.child_status == "in":
+            return super().form_invalid(form)
+        if instance.child.is_not_checked_in() == True and instance.child_status == "out":
+            return super().form_invalid(form)
         return super().form_valid(form)
 
 class ChildListView(ListView):
     template_name = "child_list.html"
     model = Child
-
 
 class ChildCreateView(CreateView):
     model = Child

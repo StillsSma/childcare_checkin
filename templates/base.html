@@ -12,20 +12,7 @@
      }
    </style>
   </head>
-  <nav>
-      <div class="container">
 
-      <ul class="nav nav-pills">
-
-          {% if not request.user.is_authenticated %}
-            <li role="presentation"><a href="{% url 'login' %}">Faculty Login</a></li>
-
-          {% endif %}
-        </ul>
-
-              </div>
-
-          </nav>
   <body>
       {% block content %}
       {% endblock %}

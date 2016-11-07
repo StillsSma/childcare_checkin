@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<nav>
+    <div class="container">
+    <ul class="nav nav-pills">
+        {% if not request.user.is_authenticated %}
+          <li role="presentation"><a href="{% url 'login' %}">Faculty Login</a></li>
+        {% else %}
+          <li role="presentation"><a href="{% url 'child_list_view' %}">Database</a></li>
+        {% endif %}
+      </ul>
+            </div>
+        </nav>
 
 <!DOCTYPE html>
 <html>
@@ -9,17 +20,17 @@
     <title></title>
   </head>
   <body>
-    <div class="container">
+    <div class="container" align="center">
       <h1>Welcome to the Daycare App! </h1>
     </div>
-    <div class="container">
+    <div class="container" align="center">
       <h4>Please Enter Your Child's 4 Digit Pin Number Below</h2>
     </div>
-    <div class="container">
+    <div class="container" align="center">
       <form class="" action="" method="post">
         {%csrf_token%}
         {{ form.as_p }}
-        <input type="submit" name="" value="Submit!">
+        <input class="btn btn-default" type="submit" name="" value="Submit!">
 
       </form>
 
